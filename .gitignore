@@ -1,0 +1,58 @@
+# Numerous always-ignore extensions
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.vi
+*~
+*.sass-cache
+
+# OS or Editor folders
+.DS_Store
+.cache
+.project
+.settings
+.tmproj
+nbproject
+Thumbs.db
+.projectile
+
+# NPM packages folder.
+node_modules/
+
+# Brunch folder for temporary files.
+tmp/
+
+# Output folders.
+public/
+
+# Don't track  bower.json; we will synthesize it from bower.default.json and bower.prod.json
+web/bower.json
+
+# Bower stuff.
+bower_components/
+
+# Fontcustom
+.fontcustom-manifest.json
+
+# Bundler
+.bundle
+.gems
+
+# File uploads
+/db/
+/uploads/
+/web/db/
+/web/uploads/
+/web/sessions/
+
+# Dumps
+/dump/
+
+# Xcode
+xcuserdata
+*.xcuserstate
+*.xccheckout

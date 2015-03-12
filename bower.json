@@ -1,0 +1,20 @@
+{
+  "name": "react-gulp",
+  "version": "0.0.0",
+  "authors": [
+    "Matt <mattfik@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.12.2",
+    "fontawesome": "~4.3.0"
+  }
+}

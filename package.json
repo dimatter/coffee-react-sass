@@ -1,0 +1,44 @@
+{
+  "name": "react-gulp",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mattfik/react-gulp.git"
+  },
+  "keywords": [
+    "react",
+    "gulp",
+    "node",
+    "sass"
+  ],
+  "author": "Matt Fikowski <mattfik@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mattfik/react-gulp/issues"
+  },
+  "homepage": "https://github.com/mattfik/react-gulp",
+  "devDependencies": {
+    "browserify": "^9.0.3",
+    "coffee-reactify": "^2.4.1",
+    "coffee-script": "^1.9.1",
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-coffee": "^2.3.1",
+    "gulp-concat": "^2.5.2",
+    "gulp-filter": "^2.0.2",
+    "gulp-nodemon": "^1.0.5",
+    "gulp-sass": "^1.3.3",
+    "gulp-util": "^3.0.4",
+    "main-bower-files": "^2.5.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^2.4.0"
+  },
+  "dependencies": {
+    "express": "^4.12.2"
+  }
+}
