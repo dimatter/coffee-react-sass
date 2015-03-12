@@ -1,0 +1,18 @@
+#left-nav {
+  $left-nav-icon-size: $base-spacing;
+  $left-nav-padding: $base-spacing / 2;
+
+  width: $left-nav-icon-size + ($left-nav-padding * 2);
+  height: 100%;
+  border-right: $base-border;
+  background-color: white;
+  box-shadow: 0 0 20px -10px black;
+
+  i {
+    padding: $left-nav-padding;
+    cursor: pointer;
+    &::before {
+      font-size: $left-nav-icon-size;
+    }
+  }
+}

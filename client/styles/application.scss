@@ -1,10 +1,20 @@
-@import "reset";
-@import "bourbon/bourbon";
-@import "base/base";
-// @import "neat/neat";
+@import 'reset';
+@import 'bourbon/bourbon';
+@import 'base/base';
+// @import 'neat/neat';
+@import 'fonts';
 
+@import 'components/components';
+
+* {
+  @include box-sizing(border-box);
+}
+
+body {
+  background-color: $base-background-color;
+}
 #main {
-  // @include span-columns(5);
+  @include position(absolute, 0px 0px 0px 0px);
 }
 
 

@@ -1,4 +1,4 @@
-RadComponent = require './rad-component'
+LeftNav = require './components/left_nav'
 
-React.render RadComponent({rad:"mos def"}),
+React.render LeftNav({rad:"mos def"}),
   document.getElementById('main')

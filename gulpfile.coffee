@@ -56,7 +56,7 @@ gulp.task 'vendor', ->
 
 gulp.task 'sass', ->
   gulp.src "#{paths.styles}/application.scss"
-    .pipe sass(errLogToConsole: true, sourceComments: 'normal', loadPath: [__dirname + '/bower_components/fontawesome/scss/'])
+    .pipe sass(errLogToConsole: true, sourceComments: 'normal')
     .pipe gulp.dest(paths.public)
 
 gulp.task 'assets', ->
@@ -80,7 +80,7 @@ gulp.task 'server', ->
 
 gulp.task 'icons', ->
   gulp.src  'bower_components/fontawesome/fonts/**.*'
-    .pipe(gulp.dest('./public/fonts')); 
+    .pipe gulp.dest('./public/fonts')
 
 gulp.task 'default', [
   'server'
