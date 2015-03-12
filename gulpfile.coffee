@@ -15,7 +15,7 @@ paths =
   public:         './public'
   scripts:        './client/coffee'
   vendor:         './vendor'
-  html:           './client/assets/*.html'
+  html:           './client/*.html'
   assets:         './client/assets/**'
   images:         './client/assets/images/**'
   styles:         './client/styles/**'
@@ -60,16 +60,18 @@ gulp.task 'sass', ->
     .pipe gulp.dest(paths.public)
 
 gulp.task 'assets', ->
-  gulp.src paths.html
-    .pipe gulp.dest(paths.public)
-
   gulp.src paths.images
     .pipe gulp.dest(paths.public + "/images")
+
+gulp.task 'html', ->
+ gulp.src paths.html
+    .pipe gulp.dest(paths.public)
 
 gulp.task 'watch', ->
   gulp.watch paths.scripts, ['scripts']
   gulp.watch paths.vendor, ['vendor']
   gulp.watch paths.assets, ['assets']
+  gulp.watch paths.html, ['html']
   gulp.watch paths.styles, ['sass']
 
 gulp.task 'server', ->
@@ -84,6 +86,7 @@ gulp.task 'default', [
   'server'
   'watch'
   'assets'
+  'html'
   'scripts'
   'vendor'
   'sass'

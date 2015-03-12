@@ -1,17 +1,16 @@
 express = require 'express'
 router = express.Router()
 
-# define the home page route
-router.get '/', (req, res) ->
-  res.send 'Birds home page'
-
-router.route('/:user_id')
+router.route('/:user_id?')
   .all (req, res, next) ->
     console.log "Incoming #{req.method} request"
-
-    next()
+    id = req.params.user_id
+    unless id?
+      res.sendFile 'index.html', { root: "./public" }
+    else
+      next()
   .get (req, res, next) ->
-    res.json '{test: "testing"}'
+    res.json { userId: req.params.user_id }
 
 module.exports = router
 
