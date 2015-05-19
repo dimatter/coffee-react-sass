@@ -1,20 +1,16 @@
+// The reset
 @import 'reset';
+
+// Vendor Dependencies
 @import 'bourbon/bourbon';
 @import 'base/base';
-// @import 'neat/neat';
+
+// Authored Dependencies
 @import 'fonts';
 
+// Components
 @import 'components/components';
 
-* {
-  @include box-sizing(border-box);
-}
-
-body {
-  background-color: $base-background-color;
-}
-#main {
-  @include position(absolute, 0px 0px 0px 0px);
-}
-
+// The shame!!!
+@import 'shame';
 

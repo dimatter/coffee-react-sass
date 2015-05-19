@@ -1,7 +1,7 @@
-express = require 'express'
-bodyParser = require 'body-parser'
-app = express()
-users = require './routes/users'
+express     = require 'express'
+bodyParser  = require 'body-parser'
+app         = express()
+users       = require './routes/users'
 
 app.set 'title', 'Skeleton'
 

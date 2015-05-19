@@ -1,35 +1,34 @@
-gulp =            require 'gulp'
-coffee =          require 'gulp-coffee'
-concat =          require 'gulp-concat'
-gutil =           require 'gulp-util'
-sass =            require 'gulp-sass'
-filter =          require 'gulp-filter'
-del =             require 'del'
-browserify =      require 'browserify'
-watchify =        require 'watchify'
-source =          require 'vinyl-source-stream'
-bower =           require 'main-bower-files'
-nodemon =         require 'gulp-nodemon'
+gulp =        require 'gulp'
+coffee =      require 'gulp-coffee'
+concat =      require 'gulp-concat'
+gutil =       require 'gulp-util'
+sass =        require 'gulp-sass'
+filter =      require 'gulp-filter'
+del =         require 'del'
+browserify =  require 'browserify'
+watchify =    require 'watchify'
+source =      require 'vinyl-source-stream'
+nodemon =     require 'gulp-nodemon'
 
 paths =
-  public:         './public'
-  scripts:        './client/coffee'
-  vendor:         './vendor'
-  html:           './client/*.html'
-  assets:         './client/assets/**'
-  images:         './client/assets/images/**'
-  styles:         './client/styles/**'
+  public:  './public'
+  scripts: './client/coffee'
+  vendor:  './vendor'
+  html:    './client/*.html'
+  assets:  './client/assets/**'
+  images:  './client/assets/images/**'
+  styles:  './client/styles/**'
 
 files =
   app:
-    js:           'application.js'
+    js: 'application.js'
   vendor:
-    js:           'vendor.js'
+    js: 'vendor.js'
 
 args = watchify.args
 args.extensions = ['.coffee', '.cjsx']
 
-bundler = watchify(browserify paths.scripts + '/application.coffee', args)
+bundler = watchify(browserify paths.scripts + '/index.coffee', args)
 bundler.transform 'coffee-reactify'
 
 bundle = ->
@@ -43,13 +42,12 @@ bundler.on 'update', bundle
 gulp.task 'scripts', bundle
 
 gulp.task 'vendor', ->
-
-  gulp.src bower().concat("vendor/*.js")
+  gulp.src "#{paths.vendor}/*.js"
     .pipe filter("**/*.js")
     .pipe concat(files.vendor.js)
     .pipe gulp.dest(paths.public)
 
-  gulp.src bower().concat("vendor/*.css")
+  gulp.src "#{paths.vendor}/*.css"
     .pipe filter("**.*.css")
     .pipe concat("vendor.css")
     .pipe gulp.dest(paths.public)
@@ -78,10 +76,6 @@ gulp.task 'server', ->
   nodemon( script: './server/main.coffee')
     .on 'restart', -> console.log "Server restarted"
 
-gulp.task 'icons', ->
-  gulp.src  'bower_components/fontawesome/fonts/**.*'
-    .pipe gulp.dest('./public/fonts')
-
 gulp.task 'default', [
   'server'
   'watch'
@@ -90,5 +84,4 @@ gulp.task 'default', [
   'scripts'
   'vendor'
   'sass'
-  'icons'
 ]

@@ -1,0 +1,12 @@
+// Quick fixes, put these somewhere meaningful
+* {
+  @include box-sizing(border-box);
+}
+
+body {
+  background-color: $base-background-color;
+}
+
+.app-root {
+  @include position(absolute, 0px 0px 0px 0px);
+}

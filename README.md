@@ -1,2 +1,4 @@
 # coffee-react-sass
-Coffee, React, Sass, Node, Bower, Gulp, Express, Font Awesome
+Coffee, React, Sass, Node, Gulp
+
+`gulp` to go
