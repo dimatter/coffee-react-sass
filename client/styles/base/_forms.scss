@@ -50,6 +50,9 @@ textarea {
     box-shadow: $form-box-shadow-focus;
     outline: none;
   }
+  &:active {
+    outline: none;
+  }
 }
 
 textarea {

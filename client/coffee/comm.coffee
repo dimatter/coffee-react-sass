@@ -20,8 +20,16 @@ module.exports = class
       url: url
       method: method
       data: data
+      beforeSend: (xhr) =>
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
       success: [success, @onSuccess]
       error: [error, @onError]
+
+    extra =
+      dataType: 'jsonp',
+      cache: false,
+      crossDomain: true,
+      processData: true
 
     # Tack on the extra options, if any
     _.extend setup, extra

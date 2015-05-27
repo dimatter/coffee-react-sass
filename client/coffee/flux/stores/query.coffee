@@ -1,5 +1,7 @@
 {
   ADD_QUERY
+  ADD_QUERY_SUCCESS
+  ADD_QUERY_FAIL
   REMOVE_QUERY
 } = require '../constants'
 
@@ -10,13 +12,18 @@ module.exports = Fluxxor.createStore
   initialize: ->
     @queryId = 0
     @queries = {}
+    @loading = false
 
     @bindActions(
       ADD_QUERY, @onAddQuery
+      ADD_QUERY_SUCCESS, @onAddQuerySuccess
+      ADD_QUERY_FAIL, @onAddQueryFail
       REMOVE_QUERY, @onRemoveQuery
     )
 
   onAddQuery: (payload) ->
+    @loading = true
+
     id = @._nextQueryId()
     query =
       id: id
@@ -25,12 +32,23 @@ module.exports = Fluxxor.createStore
     @queries[id] = query
     @emit 'change'
 
+  onAddQuerySuccess: (payload) ->
+    console.log "Success in store", payload
+    @loading = false
+    @emit 'change'
+
+  onAddQueryFail: (payload) ->
+    console.log "Failure in store", payload
+    @loading = false
+    @emit 'change'
+
   onRemoveQuery: (payload) ->
     delete @queries[payload.id]
     @emit 'change'
 
   getState: ->
     queries: @queries
+    loading: @loading
 
   _nextQueryId: ->
     ++@.queryId
