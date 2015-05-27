@@ -10,12 +10,6 @@ module.exports = class
   @post: (url, data = {}, success, error, extra = {}) ->
     @send url, "POST", data, success, error, extra
 
-  @patch: (url, data = {}, success, error, extra = {}) ->
-    @send url, "PATCH", data, success, error, extra
-
-  @delete: (url, data = {}, success, error, extra = {}) ->
-    @send url, "DELETE", data, success, error, extra
-
   # Wrapper around the jquery ajax call
   @send: (url, method = "GET", data = {}, success, error, extra = {}) ->
     setup =

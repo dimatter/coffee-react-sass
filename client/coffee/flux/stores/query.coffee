@@ -11,6 +11,7 @@ Fluxxor = require 'Fluxxor'
 module.exports = Fluxxor.createStore
   initialize: ->
     @queryId = 0
+    @results = []
     @queries = {}
     @loading = false
 
@@ -27,12 +28,13 @@ module.exports = Fluxxor.createStore
     id = @._nextQueryId()
     query =
       id: id
-      query: payload.query
+      text: payload.text
 
     @queries[id] = query
     @emit 'change'
 
   onAddQuerySuccess: (payload) ->
+    @results = payload
     @loading = false
     @emit 'change'
 
@@ -46,6 +48,7 @@ module.exports = Fluxxor.createStore
 
   getState: ->
     queries: @queries
+    results: @results
     loading: @loading
 
   _nextQueryId: ->

@@ -40,6 +40,7 @@ textarea {
   padding: $base-spacing / 3;
   transition: border-color;
   width: 100%;
+  outline: none;
 
   &:hover {
     border-color: darken($base-border-color, 10%);
@@ -50,13 +51,14 @@ textarea {
     box-shadow: $form-box-shadow-focus;
     outline: none;
   }
-  &:active {
-    outline: none;
-  }
 }
 
 textarea {
   resize: vertical;
+}
+
+input[type="submit"] {
+  outline: none;
 }
 
 input[type="search"] {

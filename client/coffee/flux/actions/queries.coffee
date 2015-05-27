@@ -10,10 +10,10 @@ comm  = require './../../comm'
 { BASE_URL } = require './../../config'
 
 module.exports =
-  addQuery: (query) ->
-    @dispatch ADD_QUERY, query: query
+  addQuery: (text) ->
+    @dispatch ADD_QUERY, text: text
 
-    comm.get "#{BASE_URL}/#{query}", {},
+    comm.get "#{BASE_URL}/#{text}", {},
       (res) =>
         @dispatch ADD_QUERY_SUCCESS, res
       (res) =>
