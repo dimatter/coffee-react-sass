@@ -1,6 +1,8 @@
 _ = require 'lodash'
 $ = require 'jquery'
 
+{ API_KEY } = require './config'
+
 module.exports = class
   @get: (url, data = {}, success, error, extra = {}) ->
     @send url, "GET", data, success, error, extra
@@ -21,15 +23,9 @@ module.exports = class
       method: method
       data: data
       beforeSend: (xhr) =>
-        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+        xhr.setRequestHeader("X-Mashape-Key", API_KEY)
       success: [success, @onSuccess]
       error: [error, @onError]
-
-    extra =
-      dataType: 'jsonp',
-      cache: false,
-      crossDomain: true,
-      processData: true
 
     # Tack on the extra options, if any
     _.extend setup, extra

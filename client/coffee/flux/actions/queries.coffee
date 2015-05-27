@@ -5,13 +5,15 @@
   REMOVE_QUERY
 } = require "../constants"
 
-comm = require './../../comm'
+# TODO: these paths are ugly... any better way?
+comm  = require './../../comm'
+{ BASE_URL } = require './../../config'
 
 module.exports =
-  addQuery: (text) ->
-    @dispatch ADD_QUERY, text: text
+  addQuery: (query) ->
+    @dispatch ADD_QUERY, query: query
 
-    comm.get 'http://www.comicvine.com/api/search/?api_key=4f9f897e7a16eb1551afafde0d1687bc50f2b46e&query=lex-luthor&format=json', {},
+    comm.get "#{BASE_URL}/#{query}", {},
       (res) =>
         @dispatch ADD_QUERY_SUCCESS, res
       (res) =>

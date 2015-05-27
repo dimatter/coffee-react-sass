@@ -27,18 +27,16 @@ module.exports = Fluxxor.createStore
     id = @._nextQueryId()
     query =
       id: id
-      text: payload.text
+      query: payload.query
 
     @queries[id] = query
     @emit 'change'
 
   onAddQuerySuccess: (payload) ->
-    console.log "Success in store", payload
     @loading = false
     @emit 'change'
 
   onAddQueryFail: (payload) ->
-    console.log "Failure in store", payload
     @loading = false
     @emit 'change'
 

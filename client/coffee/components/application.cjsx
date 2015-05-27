@@ -8,10 +8,6 @@ Fluxxor = require 'Fluxxor'
 FluxMixin = Fluxxor.FluxMixin(React)
 StoreWatchMixin = Fluxxor.StoreWatchMixin
 
-# NOTE: why does comm need to be explicilty required here, but not APE?
-comm = require './../comm'
-{ API_KEY } = require './../config'
-
 module.exports = React.createClass
   mixins: [FluxMixin, StoreWatchMixin('QueryStore')]
 
