@@ -1,62 +1,66 @@
 # @cjsx React.DOM
-Fluxxor = require 'Fluxxor'
-BarChart = require('react-d3/barchart').BarChart
+'use strict'
 
+_ = require 'lodash'
+RD3 = require 'react-d3'
+
+Fluxxor = require 'Fluxxor'
 FluxMixin = Fluxxor.FluxMixin(React)
 StoreWatchMixin = Fluxxor.StoreWatchMixin
 
+# NOTE: why does comm need to be explicilty required here, but not APE?
+comm = require './../comm'
 { API_KEY } = require './../config'
 
 module.exports = React.createClass
-  mixins: [FluxMixin, StoreWatchMixin("TodoStore")]
+  mixins: [FluxMixin, StoreWatchMixin('QueryStore')]
 
   getInitialState: ->
-    nextTodoText: ""
-    barData: [
-      label: 'A', value: 5
-      label: 'B', value: 6
-      label: 'F', value: 7
-    ]
+    newQuery: ''
 
   getStateFromFlux: ->
-    todos: @getFlux().store("TodoStore").getState().todos
+    queries: @getFlux().store('QueryStore').getState().queries
 
-  handleTodoTextChange: (e) ->
-    @setState newTodoText: e.target.value
+  handleQueryChange: (e) ->
+    @setState query: e.target.value
 
-  handleTodoRemove: (e) ->
-    @getFlux().actions.removeTodo e.target.dataset.id
+  handleQueryRemove: (e) ->
+    @getFlux().actions.removeQuery e.target.dataset.id
 
   onSubmitForm: (e) ->
     e.preventDefault()
-    console.log API_KEY
+    extras =
+      dataType: "jsonp",
+      cache: false,
+      crossDomain: true,
+      processData: true
 
-    if @state.newTodoText? and @state.newTodoText.trim()
-      @getFlux().actions.addTodo @state.newTodoText
-      @setState newTodoText: ''
+    comm.get "http://www.comicvine.com/api/search/?api_key=4f9f897e7a16eb1551afafde0d1687bc50f2b46e&query=lex-luthor&format=json", {},
+      (res) =>
+        console.warn "TODO handle success", res
+      (res) =>
+        console.warn "TODO handle error", res
+      , extras
+
+    if @state.newQuery? and @state.newQuery.trim()
+      @getFlux().actions.addTodo @state.newQuery
+      @setState query: ''
 
   render: ->
     <div className="list-wrapper">
       <ul>
         {
-          if Object.keys(@state.todos).length
-            for key, todo of @state.todos
-              <li key={key}>{todo.text}<span data-id={todo.id} onClick={@handleTodoRemove}>X</span></li>
+          if Object.keys(@state.queries).length
+            for key, query of @state.queries
+              <li key={key}>{query.text}<span data-id={query.id} onClick={@handleQueryRemove}>X</span></li>
           else
             <li>Nothing here</li>
         }
       </ul>
-      <BarChart
-        data={@state.barData}
-        width={500}
-        height={200}
-        fill={'#3182bd'}
-        title='Bar Chart'
-      />
       <form onSubmit={@onSubmitForm}>
         <input type="text" size="30" placeholder="New..."
-          value={@state.newTodoText}
-          onChange={@handleTodoTextChange} />
-        <input type="submit" value="Add todo" />
+          value={@state.newQuery}
+          onChange={@handleQueryChange} />
+        <input type="submit" value="Load" />
       </form>
     </div>

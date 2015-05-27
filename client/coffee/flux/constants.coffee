@@ -1,0 +1,3 @@
+module.exports =
+  ADD_QUERY: "ADD_QUERY"
+  REMOVE_QUERY: "REMOVE_QUERY"
