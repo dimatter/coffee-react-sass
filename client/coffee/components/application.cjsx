@@ -11,30 +11,30 @@ StoreWatchMixin = Fluxxor.StoreWatchMixin
 ListItem = require './lists/list_item'
 
 module.exports = React.createClass
-  mixins: [FluxMixin, StoreWatchMixin('QueryStore')]
+  mixins: [FluxMixin, StoreWatchMixin('ThoughtStore')]
 
   getInitialState: ->
-    newQuery: ''
+    newThought: ''
 
   # "read data from the stores at the top-level component and
   # pass the data through props as necessary."
   getStateFromFlux: ->
-    results: @getFlux().store('QueryStore').getState().results
-    queries: @getFlux().store('QueryStore').getState().queries
-    loading: @getFlux().store('QueryStore').getState().loading
+    thoughts: @getFlux().store('ThoughtStore').getState().thoughts
+    results: @getFlux().store('ThoughtStore').getState().results
+    loading: @getFlux().store('ThoughtStore').getState().loading
 
-  handleQueryChange: (e) ->
-    @setState newQuery: e.target.value
+  handleInputChange: (e) ->
+    @setState newThought: e.target.value
 
-  handleQueryRemove: (id) ->
-    @getFlux().actions.removeQuery id
+  handleThoughtRemove: (id) ->
+    @getFlux().actions.removeThought id
 
   onSubmitForm: (e) ->
     e.preventDefault()
 
-    if !@state.loading and @state.newQuery? and @state.newQuery.trim()
-      @getFlux().actions.addQuery @state.newQuery
-      @setState newQuery: ''
+    if !@state.loading and @state.newThought? and @state.newThought.trim()
+      @getFlux().actions.addThought @state.newThought
+      @setState newThought: ''
 
   getButtonClass: ->
     if @state.loading then 'loading' else ''
@@ -42,11 +42,11 @@ module.exports = React.createClass
   render: ->
     <div className="list-wrapper">
       {
-        if Object.keys(@state.queries).length
+        if Object.keys(@state.thoughts).length
           <ul>
             {
-              for key, query of @state.queries
-                <ListItem id={query.id} text={query.text} handleRemove={@handleQueryRemove} />
+              for key, thought of @state.thoughts
+                <ListItem id={thought.id} text={thought.text} handleRemove={@handleThoughtRemove} />
             }
           </ul>
         else
@@ -54,8 +54,8 @@ module.exports = React.createClass
       }
       <form onSubmit={@onSubmitForm}>
         <input type="text" size="30" placeholder="New..."
-          value={@state.newQuery}
-          onChange={@handleQueryChange} />
+          value={@state.newThought}
+          onChange={@handleInputChange} />
         <input type="submit" value="Load" className={@getButtonClass()}/>
       </form>
     </div>

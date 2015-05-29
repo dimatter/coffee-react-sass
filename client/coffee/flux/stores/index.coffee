@@ -1,4 +1,4 @@
-QueryStore = require './query'
+ThoughtStore = require './thought'
 
 module.exports =
-  QueryStore: new QueryStore
+  ThoughtStore: new ThoughtStore
