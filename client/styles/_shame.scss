@@ -11,9 +11,8 @@ body {
   @include position(absolute, 0px 0px 0px 0px);
 }
 
-.list-wrapper {
-  width: 400px;
-  margin: 100px;
+.stream-input-wrapper {
+  margin: auto 100px;
 }
 
 .list-item {
@@ -26,9 +25,24 @@ body {
   }
 }
 
-
-input[type='submit'] {
-  &.loading {
-    background-color: red;
+.new-thought-form {
+  input[type='submit'] {
+    &.loading {
+      background-color: red;
+    }
   }
+}
+
+// D#
+.node circle {
+opacity: .5;
+}
+.node text {
+  font: 10px sans-serif;
+  pointer-events: none;
+}
+path.link {
+  fill: none;
+  stroke: #101010;
+  stroke-width: 2px;
 }

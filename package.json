@@ -41,10 +41,10 @@
   },
   "dependencies": {
     "body-parser": "^1.12.0",
+    "d3": "^3.5.5",
     "express": "^4.12.2",
     "fluxxor": "^1.5.4",
     "jquery": "^2.1.4",
-    "react": "^0.13.3",
-    "react-d3": "^0.3.1"
+    "react": "^0.13.3"
   }
 }

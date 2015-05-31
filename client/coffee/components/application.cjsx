@@ -2,15 +2,18 @@
 'use strict'
 
 _ = require 'lodash'
-RD3 = require 'react-d3'
 
-Fluxxor = require 'Fluxxor'
-FluxMixin = Fluxxor.FluxMixin(React)
+Fluxxor         = require 'Fluxxor'
+FluxMixin       = Fluxxor.FluxMixin(React)
 StoreWatchMixin = Fluxxor.StoreWatchMixin
 
-ListItem = require './lists/list_item'
+ListItem   = require './lists/list_item'
+DonutChart = require './d3/donut'
 
 module.exports = React.createClass
+
+  displayName: 'Application'
+
   mixins: [FluxMixin, StoreWatchMixin('ThoughtStore')]
 
   getInitialState: ->
@@ -20,8 +23,8 @@ module.exports = React.createClass
   # pass the data through props as necessary."
   getStateFromFlux: ->
     thoughts: @getFlux().store('ThoughtStore').getState().thoughts
-    results: @getFlux().store('ThoughtStore').getState().results
-    loading: @getFlux().store('ThoughtStore').getState().loading
+    results:  @getFlux().store('ThoughtStore').getState().results
+    loading:  @getFlux().store('ThoughtStore').getState().loading
 
   handleInputChange: (e) ->
     @setState newThought: e.target.value
@@ -40,7 +43,7 @@ module.exports = React.createClass
     if @state.loading then 'loading' else ''
 
   render: ->
-    <div className="list-wrapper">
+    <div className="stream-input-wrapper">
       {
         if Object.keys(@state.thoughts).length
           <ul>
@@ -52,8 +55,9 @@ module.exports = React.createClass
         else
           <p>Nothing here</p>
       }
-      <form onSubmit={@onSubmitForm}>
-        <input type="text" size="30" placeholder="New..."
+      <DonutChart />
+      <form className="new-thought-form" onSubmit={@onSubmitForm}>
+        <input type="text" size="30" placeholder="New Thought..."
           value={@state.newThought}
           onChange={@handleInputChange} />
         <input type="submit" value="Load" className={@getButtonClass()}/>
